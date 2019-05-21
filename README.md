@@ -1,4 +1,4 @@
-# Functional/Permonance/Load Test for Redeam.
+# Functional/Performance/Load Test for Redeam.
 
 RUN chmod 755 ./bin/script.sh
 ENTRYPOINT [/bin/bash]
