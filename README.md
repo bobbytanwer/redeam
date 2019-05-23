@@ -1,13 +1,16 @@
 # Functional/Performance/Load Test for Redeam.
 
 RUN chmod 755 ./bin/script.sh
-ENTRYPOINT [/bin/bash]
+ENTRYPOINT [./functional/bin/script.sh]
 ### Test suite follows Page Object Pattern.
 For SECRET & KEY, we pass the data as __ENV variable which is available as any system variable.
 For each endpoint used as part of the use case is setup as independent and modular page.
-These pages can be called in any use case flow.
+These pages can be called in any use case flow from TestCases folder. They can be grouped in shape of user flow.
 
-    Directory Structure:
+To do a quick run. Please update the script.sh file with your key & secret values. 
+
+        
+Directory Structure:
 
          /apiModules/endpoints: 
          -   /getSupplier
@@ -21,6 +24,7 @@ These pages can be called in any use case flow.
 
          -  /get_updateSuppliers.js
             Test call getsupplier, takes the supplier id from response and makes call to getSupplierByID. Then passes version & ID to the updateASupplier Call.
+        -   2nd GROUP runs bulk update and performs         callback on the the update.
          TODO:
          -  /
          -  /
@@ -51,12 +55,20 @@ These pages can be called in any use case flow.
     k6 run --http-debug="full" ./apiModules/endPoints/updateBulkSuppliers.js
     k6 run --http-debug="full" ./functional/testCases/get_updateSupplier.js
         - You will be able to run the scripts laid out in the file.
+How to Run the test docker 
 
-    How to Run the test docker 
+If you have docker installed. Provided docker file, will be best way to run the test.(no ENV setup need !! ). 
 
-        - make sure you have docker installed.
-        - You can run locally in docker or integrate it in your CI/CD      pipeline.
-          Run: docker build . (from within project folder).
+From within the folder. Run following CMD
+        
+    Run Docker build
+Grab the image name 
+        
+      Docker run 'image_name'
+
+You can run locally in docker or integrate it in your CI/CD      pipeline.
+
+Below is from  https://docs.k6.io/docs       
 How to read results on Std out
 By default, k6 sends its output to stdout only. When started up,
 it will display a very tasteful ASCII splash screen with the k6 logo and version information, 
