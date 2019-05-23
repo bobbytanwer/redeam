@@ -9,6 +9,9 @@ import {
 import {
   user
 } from '../user.js';
+import {
+  reqID
+} from '../reqID.js'
 
 
 
@@ -17,18 +20,14 @@ const key = __ENV.KEY;
 const secret = __ENV.SECRET;
 let users = user();
 let usecase = "addSupplier";
+let reqid = reqID();
 
 
-let options = {
-  'Content-Type': 'application/json',
-  'x-api-key': `${key}`,
-  'x-api-secret': `${secret}`,
-  conversationID: `${uuid(usecase)}`
-}
+
 
 let body = {
   meta: {
-    reqId: '5fd78809-4700-46d7-8386-3b8738117f4d'
+    reqId: `${reqid}` //'5fd78809-4700-46d7-8386-3b8738117f4d'
   },
   supplier: {
     code: `${users}`,
@@ -98,7 +97,7 @@ let body = {
 }
 
 
-export default function addNewSupplier() {
+export function addNewSupplier() {
 
   let results = http.post(url, JSON.stringify(body), {
     headers: {

@@ -21,7 +21,13 @@ import {
   uuid
 } from '../apiModules/uuid.js';
 
+import {
+  reqID
+} from '../apiModules/reqID.js';
 
+import {
+  callBack
+} from '../apiModules/endPoints/callBack.js'
 
 
 export default {
@@ -31,5 +37,7 @@ export default {
   addNewSupplier,
   updateSupplierByID,
   updateBulkSuppliers,
-  uuid
+  uuid,
+  reqID,
+  callBack
 }
